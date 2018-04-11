@@ -1,0 +1,1933 @@
+{
+	"info": {
+		"_postman_id": "8490eed6-5676-4001-8025-31722614795d",
+		"name": "dingding-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "免登授权",
+			"description": "",
+			"item": [
+				{
+					"name": "企业应用免登鉴权",
+					"description": "",
+					"item": [
+						{
+							"name": "getToken Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dc16e9e6-4dc3-424e-8da3-c27b5f5fbd2b",
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.access_token) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/gettoken?corpid={{CORPID}}&corpsecret={{CORPSECRET}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"gettoken"
+									],
+									"query": [
+										{
+											"key": "corpid",
+											"value": "{{CORPID}}"
+										},
+										{
+											"key": "corpsecret",
+											"value": "{{CORPSECRET}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取jsapi_ticket Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "通过CODE换取用户身份",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.userid) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"USERID\", data.userid);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/getuserinfo?access_token={{ACCESS_TOKEN}}&code=a81c068fe5213e109ba9ef64a2b2eb5e",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"getuserinfo"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "code",
+											"value": "a81c068fe5213e109ba9ef64a2b2eb5e"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "通讯录",
+			"description": "",
+			"item": [
+				{
+					"name": "人员管理",
+					"description": "",
+					"item": [
+						{
+							"name": "获取成员详情",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.userid) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"USERID\", data.userid);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/get?access_token={{ACCESS_TOKEN}}&userid={{MANAGER_ID}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"get"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "userid",
+											"value": "{{MANAGER_ID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "创建成员",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.userid) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"USERID\", data.userid);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userid\": \"zhangsan\",\r\n    \"name\": \"张三\",\r\n    \"department\": [{{DEPTID}}],\r\n    \"position\": \"产品经理\",\r\n    \"mobile\": \"15913215420\",\r\n    \"tel\" : \"010-123333\",\r\n    \"workPlace\" :\"\",\r\n    \"remark\" : \"\",\r\n    \"email\": \"zhangsan@gzdev.com\",\r\n    \"orgEmail\": \"qiye@gzdev.com\",\r\n    \"jobnumber\": \"111111\",\r\n    \"isHide\": false,\r\n    \"isSenior\": false,\r\n    \"extattr\": {\r\n                \"爱好\":\"旅游\",\r\n                \"年龄\":\"24\"\r\n                }\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/create?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"create"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "更新成员",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.userid) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"USERID\", data.userid);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userid\": \"zhangsan\",\r\n    \"name\": \"张三x\",\r\n    \"department\": [{{DEPTID}},1],\r\n    \"position\": \"产品经理\",\r\n    \"mobile\": \"15913215420\",\r\n    \"tel\" : \"010-123333\",\r\n    \"workPlace\" :\"\",\r\n    \"remark\" : \"\",\r\n    \"email\": \"zhangsan@gzdev.com\",\r\n    \"orgEmail\": \"qiye@gzdev.com\",\r\n    \"jobnumber\": \"111111\",\r\n    \"isHide\": false,\r\n    \"isSenior\": false,\r\n    \"extattr\": {\r\n                \"爱好\":\"旅游\",\r\n                \"年龄\":\"24\"\r\n                }\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/update?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"update"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除成员",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "68554573-b325-49b6-a687-8be1a6733d63",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userid\": \"zhangsan\",\r\n    \"name\": \"张三x\",\r\n    \"department\": [{{DEPTID}},1],\r\n    \"position\": \"产品经理\",\r\n    \"mobile\": \"15913215420\",\r\n    \"tel\" : \"010-123333\",\r\n    \"workPlace\" :\"\",\r\n    \"remark\" : \"\",\r\n    \"email\": \"zhangsan@gzdev.com\",\r\n    \"orgEmail\": \"qiye@gzdev.com\",\r\n    \"jobnumber\": \"111111\",\r\n    \"isHide\": false,\r\n    \"isSenior\": false,\r\n    \"extattr\": {\r\n                \"爱好\":\"旅游\",\r\n                \"年龄\":\"24\"\r\n                }\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/delete?access_token={{ACCESS_TOKEN}}&userid={{USERID}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "userid",
+											"value": "{{USERID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取部门成员",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "38367b73-f66a-4850-a439-e1a031348430",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userid\": \"zhangsan\",\r\n    \"name\": \"张三x\",\r\n    \"department\": [{{DEPTID}},1],\r\n    \"position\": \"产品经理\",\r\n    \"mobile\": \"15913215420\",\r\n    \"tel\" : \"010-123333\",\r\n    \"workPlace\" :\"\",\r\n    \"remark\" : \"\",\r\n    \"email\": \"zhangsan@gzdev.com\",\r\n    \"orgEmail\": \"qiye@gzdev.com\",\r\n    \"jobnumber\": \"111111\",\r\n    \"isHide\": false,\r\n    \"isSenior\": false,\r\n    \"extattr\": {\r\n                \"爱好\":\"旅游\",\r\n                \"年龄\":\"24\"\r\n                }\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/simplelist?access_token={{ACCESS_TOKEN}}&department_id={{DEPTID}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"simplelist"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "department_id",
+											"value": "{{DEPTID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取部门成员（详情）",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "52dd418a-40c2-4c2c-af1a-8903c70b25f6",
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.userlist) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"UNIONID\", data.userlist[0].unionid);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userid\": \"zhangsan\",\r\n    \"name\": \"张三x\",\r\n    \"department\": [{{DEPTID}},1],\r\n    \"position\": \"产品经理\",\r\n    \"mobile\": \"15913215420\",\r\n    \"tel\" : \"010-123333\",\r\n    \"workPlace\" :\"\",\r\n    \"remark\" : \"\",\r\n    \"email\": \"zhangsan@gzdev.com\",\r\n    \"orgEmail\": \"qiye@gzdev.com\",\r\n    \"jobnumber\": \"111111\",\r\n    \"isHide\": false,\r\n    \"isSenior\": false,\r\n    \"extattr\": {\r\n                \"爱好\":\"旅游\",\r\n                \"年龄\":\"24\"\r\n                }\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/list?access_token={{ACCESS_TOKEN}}&department_id={{DEPTID}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"list"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "department_id",
+											"value": "{{DEPTID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取管理员列表",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9e3cc9f5-b80f-41dc-82ba-8337ed9c001b",
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.admin_list) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"MANAGER_ID\", data.admin_list[0].userid);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userid\": \"zhangsan\",\r\n    \"name\": \"张三x\",\r\n    \"department\": [{{DEPTID}},1],\r\n    \"position\": \"产品经理\",\r\n    \"mobile\": \"15913215420\",\r\n    \"tel\" : \"010-123333\",\r\n    \"workPlace\" :\"\",\r\n    \"remark\" : \"\",\r\n    \"email\": \"zhangsan@gzdev.com\",\r\n    \"orgEmail\": \"qiye@gzdev.com\",\r\n    \"jobnumber\": \"111111\",\r\n    \"isHide\": false,\r\n    \"isSenior\": false,\r\n    \"extattr\": {\r\n                \"爱好\":\"旅游\",\r\n                \"年龄\":\"24\"\r\n                }\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/get_admin?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"get_admin"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "根据unionid获取成员的userid",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "eed5fc5a-87bd-4e47-adf9-74b6bde94a72",
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.userid) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"USERID\", data.userid);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userid\": \"zhangsan\",\r\n    \"name\": \"张三x\",\r\n    \"department\": [{{DEPTID}},1],\r\n    \"position\": \"产品经理\",\r\n    \"mobile\": \"15913215420\",\r\n    \"tel\" : \"010-123333\",\r\n    \"workPlace\" :\"\",\r\n    \"remark\" : \"\",\r\n    \"email\": \"zhangsan@gzdev.com\",\r\n    \"orgEmail\": \"qiye@gzdev.com\",\r\n    \"jobnumber\": \"111111\",\r\n    \"isHide\": false,\r\n    \"isSenior\": false,\r\n    \"extattr\": {\r\n                \"爱好\":\"旅游\",\r\n                \"年龄\":\"24\"\r\n                }\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/getUseridByUnionid?access_token={{ACCESS_TOKEN}}&unionid={{UNIONID}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"getUseridByUnionid"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "unionid",
+											"value": "{{UNIONID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "部门管理",
+					"description": "",
+					"item": [
+						{
+							"name": "获取子部门ID列表",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/department/list_ids?access_token={{ACCESS_TOKEN}}&id=1",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"department",
+										"list_ids"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取部门列表",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/department/list?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"department",
+										"list"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取部门详情",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/department/get?access_token={{ACCESS_TOKEN}}&id=1",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"department",
+										"get"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "创建部门",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											"if(data.id){",
+											"    pm.environment.set(\"DEPTID\", data.id);",
+											"    tests['body has id']=true;",
+											"}else{",
+											"    tests['body has id']=false;",
+											"}",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"钉钉事业部\",\r\n    \"parentid\": \"1\",\r\n    \"order\": \"1\",\r\n    \"sourceIdentifier\" : \"source\"\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/department/create?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"department",
+										"create"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "更新部门",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											"if(data.id){",
+											"    pm.environment.set(\"DEPTID\", data.id);",
+											"    tests['body has id']=true;",
+											"}else{",
+											"    tests['body has id']=false;",
+											"}",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"钉钉事业部x\",\r\n    \"parentid\": \"1\",\r\n    \"order\": \"1\",\r\n    \"id\":{{DEPTID}}\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/department/update?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"department",
+										"update"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除部门",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											"if(data.id){",
+											"    pm.environment.set(\"DEPTID\", data.id);",
+											"    tests['body has id']=true;",
+											"}else{",
+											"    tests['body has id']=false;",
+											"}",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"钉钉事业部x\",\r\n    \"parentid\": \"1\",\r\n    \"order\": \"1\",\r\n    \"id\":{{DEPTID}}\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/department/delete?access_token={{ACCESS_TOKEN}}&id={{DEPTID}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"department",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "id",
+											"value": "{{DEPTID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "通讯录增量同步",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "获取企业人数",
+					"description": "",
+					"item": [
+						{
+							"name": "获取企业员工人数",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/get_org_user_count?access_token={{ACCESS_TOKEN}}&onlyActive=0",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"get_org_user_count"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "onlyActive",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "接口权限管理",
+			"description": "",
+			"item": [
+				{
+					"name": "获取CorpSecret授权范围",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/auth/scopes?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"auth",
+								"scopes"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "消息会话管理",
+			"description": "",
+			"item": [
+				{
+					"name": "创建消息会话",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.chatid) {",
+									"  tests[\"Body has chatid\"] = true;",
+									"  postman.setEnvironmentVariable(\"CHATID\", data.chatid);",
+									"}",
+									"else {",
+									"  tests[\"Body has chatid\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"放下\",\r\n    \"owner\": \"manager5294\",\r\n    \"useridlist\": [\"manager5294\"]\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/chat/create?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"chat",
+								"create"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取会话",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/chat/get?access_token={{ACCESS_TOKEN}}&chatid={{CHATID}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"chat",
+								"get"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								},
+								{
+									"key": "chatid",
+									"value": "{{CHATID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改会话",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.chatid) {",
+									"  tests[\"Body has chatid\"] = true;",
+									"  postman.setEnvironmentVariable(\"CHATID\", data.chatid);",
+									"}",
+									"else {",
+									"  tests[\"Body has chatid\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"chatid\": \"{{CHATID}}\",\r\n    \"name\": \"要放下\",\r\n    \"owner\": \"{{MANAGER_ID}}\",\r\n    \"add_useridlist\": [\"zhangsan\"]\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/chat/update?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"chat",
+								"update"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "发送群消息",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.chatid) {",
+									"  tests[\"Body has chatid\"] = true;",
+									"  postman.setEnvironmentVariable(\"MESSAGEID\", data.messageId);",
+									"}",
+									"else {",
+									"  tests[\"Body has chatid\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"chatid\": \"{{CHATID}}\",\r\n    \"msgtype\": \"text\",\r\n    \"text\": {\r\n        \"content\": \"张三的请假申请\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/chat/send?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"chat",
+								"send"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "发送群消息 action_card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.chatid) {",
+									"  tests[\"Body has chatid\"] = true;",
+									"  postman.setEnvironmentVariable(\"MESSAGEID\", data.messageId);",
+									"}",
+									"else {",
+									"  tests[\"Body has chatid\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"chatid\": \"{{CHATID}}\",\r\n    \"msgtype\": \"action_card\",\r\n    \"action_card\": {\r\n        \"title\": \"是透出到会话列表和通知的文案\",\r\n        \"markdown\": \"支持markdown格式的正文内容\",\r\n        \"single_title\": \"查看详情\",\r\n        \"single_url\": \"https://open.dingtalk.com\",\r\n        \"agentid\": \"{{AGENTID}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/chat/send?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"chat",
+								"send"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询群消息已读人员列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/chat/getReadList?access_token={{ACCESS_TOKEN}}&messageId={{MESSAGEID}}&cursor=1&size=10",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"chat",
+								"getReadList"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								},
+								{
+									"key": "messageId",
+									"value": "{{MESSAGEID}}"
+								},
+								{
+									"key": "cursor",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "文件管理",
+			"description": "",
+			"item": [
+				{
+					"name": "管理多媒体文件",
+					"description": "",
+					"item": [
+						{
+							"name": "上传媒体文件",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8c6d6b1e-fd42-4b28-8056-60b88f131f54",
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.media_id) {",
+											"  tests[\"Body has media_id\"] = true;",
+											"  postman.setEnvironmentVariable(\"MEDIA_ID_x\", data.media_id);",
+											"}",
+											"else {",
+											"  tests[\"Body has media_id\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "media",
+											"description": "",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/media/upload?access_token={{ACCESS_TOKEN}}&type={{TYPE}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"media",
+										"upload"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "type",
+											"value": "{{TYPE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取媒体文件",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c4e6c7a6-e3ce-4a26-9b9d-e5b856a25e66",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/media/downloadFile?access_token={{ACCESS_TOKEN}}&media_id={{MEDIA_ID_x}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"media",
+										"downloadFile"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "media_id",
+											"value": "{{MEDIA_ID_x}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "钉盘",
+					"description": "",
+					"item": [
+						{
+							"name": "单步文件上传",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f9bd568a-217e-428c-b663-5495c75a1d20",
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.media_id) {",
+											"  tests[\"Body has media_id\"] = true;",
+											"  postman.setEnvironmentVariable(\"MEDIA_ID\", data.media_id);",
+											"}",
+											"else {",
+											"  tests[\"Body has media_id\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/file/upload/single?access_token={{ACCESS_TOKEN}}&agent_id={{AGENTID}}&file_size=1720",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"file",
+										"upload",
+										"single"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "agent_id",
+											"value": "{{AGENTID}}"
+										},
+										{
+											"key": "file_size",
+											"value": "1720"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "发送文件给指定用户",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "media_id",
+											"value": "{{MEDIA_ID}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "file_name",
+											"value": "star.png",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/cspace/add_to_single_chat?access_token={{ACCESS_TOKEN}}&agent_id={{AGENTID}}&userid={{USERID}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"cspace",
+										"add_to_single_chat"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "agent_id",
+											"value": "{{AGENTID}}"
+										},
+										{
+											"key": "userid",
+											"value": "{{USERID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "智能办公",
+			"description": "",
+			"item": [
+				{
+					"name": "考勤管理",
+					"description": "",
+					"item": [
+						{
+							"name": "考勤排班详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "method",
+											"value": "dingtalk.smartwork.attends.listschedule",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "session",
+											"value": "{{ACCESS_TOKEN}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "timestamp",
+											"value": "2018-04-11 15:08:00",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "format",
+											"value": "json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "v",
+											"value": "2.0",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "work_date",
+											"value": "2018-04-11",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://eco.taobao.com/router/rest",
+									"protocol": "https",
+									"host": [
+										"eco",
+										"taobao",
+										"com"
+									],
+									"path": [
+										"router",
+										"rest"
+									]
+								},
+								"description": "timestamp、work_date 格式特殊 请自行设置"
+							},
+							"response": []
+						},
+						{
+							"name": "考勤组详情接口",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "method",
+											"value": "dingtalk.smartwork.attends.getsimplegroups",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "session",
+											"value": "{{ACCESS_TOKEN}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "timestamp",
+											"value": "2018-04-11 15:08:00",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "format",
+											"value": "json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "v",
+											"value": "2.0",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://eco.taobao.com/router/rest",
+									"protocol": "https",
+									"host": [
+										"eco",
+										"taobao",
+										"com"
+									],
+									"path": [
+										"router",
+										"rest"
+									]
+								},
+								"description": "timestamp、work_date 格式特殊 请自行设置"
+							},
+							"response": []
+						},
+						{
+							"name": "考勤打卡记录开放",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userIds\": [\"{{USERID}}\",\"zhangsan\"],\r\n    \"checkDateFrom\": \"2018-04-11 09:00:00\",\r\n    \"checkDateTo\": \"2018-04-12 09:00:00\"\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/attendance/listRecord?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"attendance",
+										"listRecord"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										}
+									]
+								},
+								"description": "timestamp、work_date 格式特殊 请自行设置"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "签到管理",
+					"description": "",
+					"item": [
+						{
+							"name": "签到接口",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d1fce562-d634-4172-ae72-50a653254205",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/checkin/record?access_token={{ACCESS_TOKEN}}&department_id=1&start_time=1513320000&end_time={{$timestamp}}&offset=0&size=100&order=asc",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"checkin",
+										"record"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										},
+										{
+											"key": "department_id",
+											"value": "1"
+										},
+										{
+											"key": "start_time",
+											"value": "1513320000"
+										},
+										{
+											"key": "end_time",
+											"value": "{{$timestamp}}"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "100"
+										},
+										{
+											"key": "order",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取多个用户的签到记录",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "method",
+											"value": "dingtalk.smartwork.checkin.record.get",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "session",
+											"value": "{{ACCESS_TOKEN}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "timestamp",
+											"value": "2018-04-11 15:38:00",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "format",
+											"value": "json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "v",
+											"value": "2.0",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "userid_list",
+											"value": "{{USERID}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "start_time",
+											"value": "1520000000",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "end_time",
+											"value": "{{$timestamp}}",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "cursor",
+											"value": "0",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "size",
+											"value": "100",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://eco.taobao.com/router/rest",
+									"protocol": "https",
+									"host": [
+										"eco",
+										"taobao",
+										"com"
+									],
+									"path": [
+										"router",
+										"rest"
+									]
+								},
+								"description": "timestamp、work_date 格式特殊 请自行设置"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "JS接口API",
+			"description": "",
+			"item": [
+				{
+					"name": "获取jsapi_ticket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc16e9e6-4dc3-424e-8da3-c27b5f5fbd2b",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							" ",
+							"if (data.access_token) {",
+							"  tests[\"Body has access_token\"] = true;",
+							"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+							"}",
+							"else {",
+							"  tests[\"Body has access_token\"] = false;",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://oapi.dingtalk.com/gettoken?corpid={{CORPID}}&corpsecret={{CORPSECRET}}",
+					"protocol": "https",
+					"host": [
+						"oapi",
+						"dingtalk",
+						"com"
+					],
+					"path": [
+						"gettoken"
+					],
+					"query": [
+						{
+							"key": "corpid",
+							"value": "{{CORPID}}"
+						},
+						{
+							"key": "corpsecret",
+							"value": "{{CORPSECRET}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
