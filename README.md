@@ -15,6 +15,8 @@
 * 智能办公
 * js接口api
 * access_token获取
+---
+文档中有些接口不便于直接测试，需要逐步完善
 
 ### 截图
 ![Postman](http://7xiakq.com1.z0.glb.clouddn.com/dingding-server-api.PNG)
