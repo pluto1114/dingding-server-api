@@ -71,7 +71,22 @@
 								"header": [],
 								"body": {},
 								"url": {
-									"raw": ""
+									"raw": "https://oapi.dingtalk.com/get_jsapi_ticket?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"get_jsapi_ticket"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}"
+										}
+									]
 								}
 							},
 							"response": []
@@ -1075,11 +1090,12 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "81633e00-a9b3-4f2b-ac74-7291fc509db3",
 								"type": "text/javascript",
 								"exec": [
 									"var data = JSON.parse(responseBody);",
 									" ",
-									"if (data.chatid) {",
+									"if (data.messageId) {",
 									"  tests[\"Body has chatid\"] = true;",
 									"  postman.setEnvironmentVariable(\"MESSAGEID\", data.messageId);",
 									"}",
@@ -1871,7 +1887,22 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "https://oapi.dingtalk.com/get_jsapi_ticket?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"get_jsapi_ticket"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
 						}
 					},
 					"response": []
@@ -1884,7 +1915,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "dc16e9e6-4dc3-424e-8da3-c27b5f5fbd2b",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
