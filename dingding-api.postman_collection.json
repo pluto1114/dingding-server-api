@@ -973,7 +973,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"放下\",\r\n    \"owner\": \"manager5294\",\r\n    \"useridlist\": [\"manager5294\"]\r\n}"
+							"raw": "{\r\n    \"name\": \"阳光照过来\",\r\n    \"owner\": \"{{USERID}}\",\r\n    \"useridlist\": [\"{{USERID}}\"]\r\n}"
 						},
 						"url": {
 							"raw": "https://oapi.dingtalk.com/chat/create?access_token={{ACCESS_TOKEN}}",
@@ -1234,6 +1234,147 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "发送企业通知",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "method",
+									"value": "dingtalk.corp.message.corpconversation.asyncsend",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "session",
+									"value": "{{ACCESS_TOKEN}}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "timestamp",
+									"value": "2018-05-16 11:38:00",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "format",
+									"value": "json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "v",
+									"value": "2.0",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "msgtype",
+									"value": "text",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "agent_id",
+									"value": "{{AGENTID}}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "msgcontent",
+									"value": "{\"message_url\": \"http://dingtalk.com\",\"head\": {\"bgcolor\": \"FFBBBBBB\",\"text\": \"头部标题\"},\"body\": {\"title\": \"正文标题\",\"form\": [{\"key\": \"姓名:\",\"value\": \"张三\"},{\"key\": \"爱好:\",\"value\": \"打球、听音乐\"}],\"rich\": {\"num\": \"15.6\",\"unit\": \"元\"},\"content\": \"大段文本大段文本大段文本大段文本大段文本大段文本大段文本大段文本大段文本大段文本大段文本大段文本\",\"image\": \"@lADOADmaWMzazQKA\",\"file_count\": \"3\",\"author\": \"李四 \"}}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://eco.taobao.com/router/rest",
+							"protocol": "https",
+							"host": [
+								"eco",
+								"taobao",
+								"com"
+							],
+							"path": [
+								"router",
+								"rest"
+							]
+						},
+						"description": "timestamp、work_date 格式特殊 请自行设置"
+					},
+					"response": []
+				},
+				{
+					"name": "发送企业通知 Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"touser\":\"{{USERID}}\",\n\t\"agentid\":\"{{AGENTID}}\",\n\t\"msgtype\":\"text\",\n\t\"text\":{\n\t\t\"content\":\"张三\"\n\t}\n\t\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/message/send?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"message",
+								"send"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": "timestamp、work_date 格式特殊 请自行设置"
+					},
+					"response": []
 				}
 			]
 		},
@@ -1281,7 +1422,7 @@
 									]
 								},
 								"url": {
-									"raw": "https://oapi.dingtalk.com/media/upload?access_token={{ACCESS_TOKEN}}&type={{TYPE}}",
+									"raw": "https://oapi.dingtalk.com/media/upload?access_token={{ACCESS_TOKEN}}&type=image",
 									"protocol": "https",
 									"host": [
 										"oapi",
@@ -1299,7 +1440,7 @@
 										},
 										{
 											"key": "type",
-											"value": "{{TYPE}}"
+											"value": "image"
 										}
 									]
 								}
@@ -1910,11 +2051,364 @@
 			]
 		},
 		{
+			"name": "微应用管理",
+			"description": "",
+			"item": [
+				{
+					"name": "创建微应用",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0c44d77-9593-484f-9e9c-5e4d98a84e96",
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.agentid) {",
+									"  tests[\"Body has agentid\"] = true;",
+									"  postman.setEnvironmentVariable(\"new_agentid\", data.agentid);",
+									"}",
+									"else {",
+									"  tests[\"Body has media_id\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appIcon\": \"{{MEDIA_ID_x}}\",\r\n    \"appName\": \"测试微应用\",\r\n    \"appDesc\": \"测试使用的微应用\",\r\n    \"homepageUrl\": \"http://oa.dingtalk.com/?h5\",\r\n    \"pcHomepageUrl\": \"http://oa.dingtalk.com/?pc\"\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/microapp/create?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"microapp",
+								"create"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新微应用",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0c44d77-9593-484f-9e9c-5e4d98a84e96",
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.agentid) {",
+									"  tests[\"Body has agentid\"] = true;",
+									"  postman.setEnvironmentVariable(\"new_agentid\", data.agentid);",
+									"}",
+									"else {",
+									"  tests[\"Body has media_id\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appIcon\": \"{{MEDIA_ID_x}}\",\r\n    \"appName\": \"微应用\",\r\n    \"appDesc\": \"测试使用的微应用\",\r\n    \"homepageUrl\": \"http://oa.dingtalk.com/?h5\",\r\n    \"pcHomepageUrl\": \"http://oa.dingtalk.com/?pc\",\r\n    \"agentId\": {{new_agentid}}\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/microapp/update?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"microapp",
+								"update"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除微应用",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "94529495-30c1-4139-8ec5-911d814d2435",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agentId\": {{new_agentid}}\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/microapp/delete?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"microapp",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除微应用 Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "94529495-30c1-4139-8ec5-911d814d2435",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agentId\": {{new_agentid}}\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/microapp/delete?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"microapp",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取微应用可见范围",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "94529495-30c1-4139-8ec5-911d814d2435",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agentId\": {{AGENTID}}\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/microapp/visible_scopes?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"microapp",
+								"visible_scopes"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置微应用的可见范围",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "94529495-30c1-4139-8ec5-911d814d2435",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agentId\": {{AGENTID}},\r\n    \"isHidden\":false,\r\n    \"deptVisibleScopes\":[63678036],\r\n    \"userVisibleScopes\":[]\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/microapp/set_visible_scopes?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"microapp",
+								"set_visible_scopes"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "群机器人",
+			"description": "",
+			"item": [
+				{
+					"name": "自定义机器人",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"msgtype\": \"text\",\r\n     \"text\": {\r\n         \"content\": \"我就是我,  @1825718XXXX 是不一样的烟火\"\r\n     },\r\n     \"at\": {\r\n         \"atMobiles\": [\r\n             \"1825718XXXX\"\r\n         ], \r\n         \"isAtAll\": false\r\n     }\r\n }"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/robot/send?access_token=9c31b9a115caa1dd097aab98adc7c0c24b2fa1b33af46de9a8183238ec79578c",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"robot",
+								"send"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "9c31b9a115caa1dd097aab98adc7c0c24b2fa1b33af46de9a8183238ec79578c"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "getToken",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
+						"id": "dc16e9e6-4dc3-424e-8da3-c27b5f5fbd2b",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
