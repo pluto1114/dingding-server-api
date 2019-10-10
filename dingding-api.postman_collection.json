@@ -1,152 +1,11 @@
 {
 	"info": {
-		"_postman_id": "8490eed6-5676-4001-8025-31722614795d",
 		"name": "dingding-api",
+		"_postman_id": "8490eed6-5676-4001-8025-31722614795d",
+		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "免登授权",
-			"description": "",
-			"item": [
-				{
-					"name": "企业应用免登鉴权",
-					"description": "",
-					"item": [
-						{
-							"name": "getToken Copy",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "dc16e9e6-4dc3-424e-8da3-c27b5f5fbd2b",
-										"type": "text/javascript",
-										"exec": [
-											"var data = JSON.parse(responseBody);",
-											" ",
-											"if (data.access_token) {",
-											"  tests[\"Body has access_token\"] = true;",
-											"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
-											"}",
-											"else {",
-											"  tests[\"Body has access_token\"] = false;",
-											"}"
-										]
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "https://oapi.dingtalk.com/gettoken?corpid={{CORPID}}&corpsecret={{CORPSECRET}}",
-									"protocol": "https",
-									"host": [
-										"oapi",
-										"dingtalk",
-										"com"
-									],
-									"path": [
-										"gettoken"
-									],
-									"query": [
-										{
-											"key": "corpid",
-											"value": "{{CORPID}}"
-										},
-										{
-											"key": "corpsecret",
-											"value": "{{CORPSECRET}}"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "获取jsapi_ticket Copy",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "https://oapi.dingtalk.com/get_jsapi_ticket?access_token={{ACCESS_TOKEN}}",
-									"protocol": "https",
-									"host": [
-										"oapi",
-										"dingtalk",
-										"com"
-									],
-									"path": [
-										"get_jsapi_ticket"
-									],
-									"query": [
-										{
-											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "通过CODE换取用户身份",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"type": "text/javascript",
-										"exec": [
-											"var data = JSON.parse(responseBody);",
-											" ",
-											"if (data.userid) {",
-											"  tests[\"Body has access_token\"] = true;",
-											"  postman.setEnvironmentVariable(\"USERID\", data.userid);",
-											"}",
-											"else {",
-											"  tests[\"Body has access_token\"] = false;",
-											"}"
-										]
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "https://oapi.dingtalk.com/user/getuserinfo?access_token={{ACCESS_TOKEN}}&code=a81c068fe5213e109ba9ef64a2b2eb5e",
-									"protocol": "https",
-									"host": [
-										"oapi",
-										"dingtalk",
-										"com"
-									],
-									"path": [
-										"user",
-										"getuserinfo"
-									],
-									"query": [
-										{
-											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
-										},
-										{
-											"key": "code",
-											"value": "a81c068fe5213e109ba9ef64a2b2eb5e"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
-				}
-			]
-		},
 		{
 			"name": "通讯录",
 			"description": "",
@@ -195,14 +54,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "userid",
-											"value": "{{MANAGER_ID}}"
+											"value": "{{MANAGER_ID}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						},
@@ -254,10 +116,12 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						},
@@ -309,27 +173,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						},
 						{
 							"name": "删除成员",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "68554573-b325-49b6-a687-8be1a6733d63",
-										"type": "text/javascript",
-										"exec": [
-											""
-										]
-									}
-								}
-							],
 							"request": {
 								"method": "GET",
 								"header": [
@@ -357,31 +211,22 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "userid",
-											"value": "{{USERID}}"
+											"value": "{{USERID}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": ""
 							},
 							"response": []
 						},
 						{
 							"name": "获取部门成员",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "38367b73-f66a-4850-a439-e1a031348430",
-										"type": "text/javascript",
-										"exec": [
-											""
-										]
-									}
-								}
-							],
 							"request": {
 								"method": "GET",
 								"header": [
@@ -409,14 +254,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "department_id",
-											"value": "{{DEPTID}}"
+											"value": "{{DEPTID}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": ""
 							},
 							"response": []
 						},
@@ -426,7 +274,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "52dd418a-40c2-4c2c-af1a-8903c70b25f6",
 										"type": "text/javascript",
 										"exec": [
 											"var data = JSON.parse(responseBody);",
@@ -469,14 +316,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "department_id",
-											"value": "{{DEPTID}}"
+											"value": "{{DEPTID}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": ""
 							},
 							"response": []
 						},
@@ -486,7 +336,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "9e3cc9f5-b80f-41dc-82ba-8337ed9c001b",
 										"type": "text/javascript",
 										"exec": [
 											"var data = JSON.parse(responseBody);",
@@ -524,10 +373,12 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						},
@@ -537,7 +388,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "eed5fc5a-87bd-4e47-adf9-74b6bde94a72",
 										"type": "text/javascript",
 										"exec": [
 											"var data = JSON.parse(responseBody);",
@@ -575,14 +425,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "unionid",
-											"value": "{{UNIONID}}"
+											"value": "{{UNIONID}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						}
@@ -614,14 +467,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "id",
-											"value": "1"
+											"value": "1",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						},
@@ -646,10 +502,47 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "获取部门列表-递归",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/department/list?access_token={{ACCESS_TOKEN}}&fetch_child=true",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"department",
+										"list"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
+										},
+										{
+											"key": "fetch_child",
+											"value": "true",
+											"equals": true
+										}
+									]
+								},
+								"description": null
 							},
 							"response": []
 						},
@@ -674,14 +567,70 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "id",
-											"value": "1"
+											"value": "1",
+											"equals": true
 										}
 									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "通讯录权限范围",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.access_token) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
 								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/gettoken?corpid={{CORPID}}&corpsecret={{CORPSECRET}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"gettoken"
+									],
+									"query": [
+										{
+											"key": "corpid",
+											"value": "{{CORPID}}",
+											"equals": true
+										},
+										{
+											"key": "corpsecret",
+											"value": "{{CORPSECRET}}",
+											"equals": true
+										}
+									]
+								},
+								"description": null
 							},
 							"response": []
 						},
@@ -733,10 +682,12 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": ""
 							},
 							"response": []
 						},
@@ -788,10 +739,12 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": ""
 							},
 							"response": []
 						},
@@ -843,14 +796,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "id",
-											"value": "{{DEPTID}}"
+											"value": "{{DEPTID}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						}
@@ -888,14 +844,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "onlyActive",
-											"value": "0"
+											"value": "0",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						}
@@ -929,10 +888,12 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -990,10 +951,12 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -1018,14 +981,17 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								},
 								{
 									"key": "chatid",
-									"value": "{{CHATID}}"
+									"value": "{{CHATID}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -1077,10 +1043,12 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -1090,7 +1058,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "81633e00-a9b3-4f2b-ac74-7291fc509db3",
 								"type": "text/javascript",
 								"exec": [
 									"var data = JSON.parse(responseBody);",
@@ -1133,10 +1100,12 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -1188,10 +1157,12 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": ""
 					},
 					"response": []
 				},
@@ -1216,39 +1187,32 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								},
 								{
 									"key": "messageId",
-									"value": "{{MESSAGEID}}"
+									"value": "{{MESSAGEID}}",
+									"equals": true
 								},
 								{
 									"key": "cursor",
-									"value": "1"
+									"value": "1",
+									"equals": true
 								},
 								{
 									"key": "size",
-									"value": "10"
+									"value": "10",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
 				{
 					"name": "发送企业通知",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1329,18 +1293,6 @@
 				},
 				{
 					"name": "发送企业通知 Copy",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1351,7 +1303,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"touser\":\"{{USERID}}\",\n\t\"agentid\":\"{{AGENTID}}\",\n\t\"msgtype\":\"text\",\n\t\"text\":{\n\t\t\"content\":\"张三\"\n\t}\n\t\n}"
+							"raw": "{\n  \"touser\":\"{{USERID}}\",\n  \"agentid\":\"{{AGENTID}}\",\n  \"msgtype\":\"text\",\n  \"text\":{\n    \"content\":\"张三\"\n  }\n  \n}"
 						},
 						"url": {
 							"raw": "https://oapi.dingtalk.com/message/send?access_token={{ACCESS_TOKEN}}",
@@ -1368,7 +1320,8 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
 						},
@@ -1392,7 +1345,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "8c6d6b1e-fd42-4b28-8056-60b88f131f54",
 										"type": "text/javascript",
 										"exec": [
 											"var data = JSON.parse(responseBody);",
@@ -1416,6 +1368,7 @@
 									"formdata": [
 										{
 											"key": "media",
+											"value": "",
 											"description": "",
 											"type": "file"
 										}
@@ -1436,31 +1389,22 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "type",
-											"value": "image"
+											"value": "image",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						},
 						{
 							"name": "获取媒体文件",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "c4e6c7a6-e3ce-4a26-9b9d-e5b856a25e66",
-										"type": "text/javascript",
-										"exec": [
-											""
-										]
-									}
-								}
-							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -1480,14 +1424,17 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "media_id",
-											"value": "{{MEDIA_ID_x}}"
+											"value": "{{MEDIA_ID_x}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						}
@@ -1504,7 +1451,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "f9bd568a-217e-428c-b663-5495c75a1d20",
 										"type": "text/javascript",
 										"exec": [
 											"var data = JSON.parse(responseBody);",
@@ -1528,6 +1474,7 @@
 									"formdata": [
 										{
 											"key": "file",
+											"value": "",
 											"description": "",
 											"type": "file"
 										}
@@ -1549,18 +1496,22 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "agent_id",
-											"value": "{{AGENTID}}"
+											"value": "{{AGENTID}}",
+											"equals": true
 										},
 										{
 											"key": "file_size",
-											"value": "1720"
+											"value": "1720",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						},
@@ -1606,18 +1557,22 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "agent_id",
-											"value": "{{AGENTID}}"
+											"value": "{{AGENTID}}",
+											"equals": true
 										},
 										{
 											"key": "userid",
-											"value": "{{USERID}}"
+											"value": "{{USERID}}",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						}
@@ -1636,18 +1591,6 @@
 					"item": [
 						{
 							"name": "考勤排班详情",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
-										"type": "text/javascript",
-										"exec": [
-											""
-										]
-									}
-								}
-							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -1716,18 +1659,6 @@
 						},
 						{
 							"name": "考勤组详情接口",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
-										"type": "text/javascript",
-										"exec": [
-											""
-										]
-									}
-								}
-							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -1790,18 +1721,6 @@
 						},
 						{
 							"name": "考勤打卡记录开放",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
-										"type": "text/javascript",
-										"exec": [
-											""
-										]
-									}
-								}
-							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -1829,7 +1748,47 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
+										}
+									]
+								},
+								"description": "timestamp、work_date 格式特殊 请自行设置"
+							},
+							"response": []
+						},
+						{
+							"name": "查询请假状态",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userid_list\": \"{{USERID}}\",\r\n    \"start_time\": \"1554048000000\",\r\n    \"end_time\": \"1561443958000\",\r\n    \"offset\":0,\r\n    \"size\":20\r\n}"
+								},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/topapi/attendance/getleavestatus?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"topapi",
+										"attendance",
+										"getleavestatus"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										}
 									]
 								},
@@ -1846,18 +1805,6 @@
 					"item": [
 						{
 							"name": "签到接口",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "d1fce562-d634-4172-ae72-50a653254205",
-										"type": "text/javascript",
-										"exec": [
-											""
-										]
-									}
-								}
-							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -1877,51 +1824,47 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "{{ACCESS_TOKEN}}"
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
 										},
 										{
 											"key": "department_id",
-											"value": "1"
+											"value": "1",
+											"equals": true
 										},
 										{
 											"key": "start_time",
-											"value": "1513320000"
+											"value": "1513320000",
+											"equals": true
 										},
 										{
 											"key": "end_time",
-											"value": "{{$timestamp}}"
+											"value": "{{$timestamp}}",
+											"equals": true
 										},
 										{
 											"key": "offset",
-											"value": "0"
+											"value": "0",
+											"equals": true
 										},
 										{
 											"key": "size",
-											"value": "100"
+											"value": "100",
+											"equals": true
 										},
 										{
 											"key": "order",
-											"value": "asc"
+											"value": "asc",
+											"equals": true
 										}
 									]
-								}
+								},
+								"description": null
 							},
 							"response": []
 						},
 						{
 							"name": "获取多个用户的签到记录",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "a958fd79-cb1a-451f-8690-9e853f902ddf",
-										"type": "text/javascript",
-										"exec": [
-											""
-										]
-									}
-								}
-							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -2041,12 +1984,163 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "免登授权",
+			"description": "",
+			"item": [
+				{
+					"name": "企业应用免登鉴权",
+					"description": "",
+					"item": [
+						{
+							"name": "getToken Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.access_token) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/gettoken?corpid={{CORPID}}&corpsecret={{CORPSECRET}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"gettoken"
+									],
+									"query": [
+										{
+											"key": "corpid",
+											"value": "{{CORPID}}",
+											"equals": true
+										},
+										{
+											"key": "corpsecret",
+											"value": "{{CORPSECRET}}",
+											"equals": true
+										}
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "获取jsapi_ticket Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/get_jsapi_ticket?access_token={{ACCESS_TOKEN}}",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"get_jsapi_ticket"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
+										}
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "通过CODE换取用户身份",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											" ",
+											"if (data.userid) {",
+											"  tests[\"Body has access_token\"] = true;",
+											"  postman.setEnvironmentVariable(\"USERID\", data.userid);",
+											"}",
+											"else {",
+											"  tests[\"Body has access_token\"] = false;",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://oapi.dingtalk.com/user/getuserinfo?access_token={{ACCESS_TOKEN}}&code=a81c068fe5213e109ba9ef64a2b2eb5e",
+									"protocol": "https",
+									"host": [
+										"oapi",
+										"dingtalk",
+										"com"
+									],
+									"path": [
+										"user",
+										"getuserinfo"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{ACCESS_TOKEN}}",
+											"equals": true
+										},
+										{
+											"key": "code",
+											"value": "a81c068fe5213e109ba9ef64a2b2eb5e",
+											"equals": true
+										}
+									]
+								},
+								"description": null
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
 				}
 			]
 		},
@@ -2060,7 +2154,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f0c44d77-9593-484f-9e9c-5e4d98a84e96",
 								"type": "text/javascript",
 								"exec": [
 									"var data = JSON.parse(responseBody);",
@@ -2103,10 +2196,12 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
@@ -2116,7 +2211,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f0c44d77-9593-484f-9e9c-5e4d98a84e96",
 								"type": "text/javascript",
 								"exec": [
 									"var data = JSON.parse(responseBody);",
@@ -2159,27 +2253,17 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
 				{
 					"name": "删除微应用",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "94529495-30c1-4139-8ec5-911d814d2435",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -2207,75 +2291,17 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "删除微应用 Copy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "94529495-30c1-4139-8ec5-911d814d2435",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"agentId\": {{new_agentid}}\r\n}"
 						},
-						"url": {
-							"raw": "https://oapi.dingtalk.com/microapp/delete?access_token={{ACCESS_TOKEN}}",
-							"protocol": "https",
-							"host": [
-								"oapi",
-								"dingtalk",
-								"com"
-							],
-							"path": [
-								"microapp",
-								"delete"
-							],
-							"query": [
-								{
-									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
-								}
-							]
-						}
+						"description": null
 					},
 					"response": []
 				},
 				{
 					"name": "获取微应用可见范围",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "94529495-30c1-4139-8ec5-911d814d2435",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -2303,27 +2329,17 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
 					},
 					"response": []
 				},
 				{
 					"name": "设置微应用的可见范围",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "94529495-30c1-4139-8ec5-911d814d2435",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -2351,10 +2367,50 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "{{ACCESS_TOKEN}}"
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
 								}
 							]
-						}
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "获取应用列表",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agentId\": {{AGENTID}},\r\n    \"isHidden\":false,\r\n    \"deptVisibleScopes\":[63678036],\r\n    \"userVisibleScopes\":[]\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/microapp/list?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"microapp",
+								"list"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
+								}
+							]
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -2393,10 +2449,806 @@
 							"query": [
 								{
 									"key": "access_token",
-									"value": "9c31b9a115caa1dd097aab98adc7c0c24b2fa1b33af46de9a8183238ec79578c"
+									"value": "9c31b9a115caa1dd097aab98adc7c0c24b2fa1b33af46de9a8183238ec79578c",
+									"equals": true
 								}
 							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "审批",
+			"description": "",
+			"item": [
+				{
+					"name": "发起审批实例",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.access_token) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"process_instance_id\", data.process_instance_id);",
+									"  postman.setEnvironmentVariable(\"start_time\", new Date().getTime());",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
 						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "process_code",
+									"value": "PROC-7B3A47AD-CD5C-412C-A0AD-789B190CE3CC",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "originator_user_id",
+									"value": "1335674912844702",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "dept_id",
+									"value": "103284134",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "form_component_values",
+									"value": "[{\"name\":\"交通工具\",\"value\":\"car\"},{\"name\":\"金额\",\"value\":\"200\"}]",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "agent_id",
+									"value": "250667389",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/processinstance/create?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"processinstance",
+								"create"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "获取单个审批实例",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.access_token) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"process_instance_id\", data.process_instance_id);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "process_instance_id",
+									"value": "{{process_instance_id}}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/processinstance/get?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"processinstance",
+								"get"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "批量获取审批实例id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.access_token) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"process_instance_id\", data.process_instance_id);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "process_code",
+									"value": "PROC-77F6680A-1535-4E30-B582-8944BD86C7B0",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "start_time",
+									"value": "1496678400000",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/processinstance/listids?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"processinstance",
+								"listids"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "待办",
+			"description": "",
+			"item": [
+				{
+					"name": "发起待办",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-key",
+								"value": "nmt"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"userid\":\"09441216131253154\",\r\n      \"create_time\":\"1569673589473\",\r\n      \"title\":\"代办测试\",\r\n      \"url\":\"https://weixin.nmict.cn/cfo-share/?key=nmlt\",\r\n      \"formItemList\":{\r\n        \"title\":\"测试\",\r\n        \"content\":\"内容测试\"\r\n      }\r\n    \r\n  }"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/workrecord/add?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"workrecord",
+								"add"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "发起待办测试",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-key",
+								"value": "nmlt"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://weixin.nmict.cn:9021/v1/record-test-add/09441216131253154",
+							"protocol": "http",
+							"host": [
+								"weixin",
+								"nmict",
+								"cn"
+							],
+							"port": "9021",
+							"path": [
+								"v1",
+								"record-test-add",
+								"09441216131253154"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "更新待办测试",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-key",
+								"value": "nmlt"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"userid\":\"09441216131253154\",\r\n      \"record_id\":\"record6ed9699391ceef0d3738deaa1ecbf08d\"\r\n    }"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/workrecord/update?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"workrecord",
+								"update"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "列举待办测试",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-key",
+								"value": "nmlt"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"userid\":\"09441216131253154\",\r\n      \"offset\":0,\r\n      \"limit\":50,\r\n      \"status\":0\r\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/workrecord/getbyuserid?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"workrecord",
+								"getbyuserid"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "智能工作流",
+			"description": "",
+			"item": [
+				{
+					"name": "创建模板",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.errcode==0) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"PROCESS_CODE\", data.result.process_code);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"saveProcessRequest\":{\n    \"name\":\"nps-true-x\",\n    \"description\":\"test\",\n\n    \"form_component_list\":{\n      \"component_name\":\"TextField\",\n      \"props\":{\n        \"id\":\"TextField-J78F056R\",\n        \"label\":\"single\"\n      }\n    },\n    \"fake_mode\":true\n  }\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/process/save?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"process",
+								"save"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}",
+									"equals": true
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "删除模板",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.access_token) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"request\":{\n    \"process_code\":\"{{PROCESS_CODE}}\"\n    \n  }\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/process/delete?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"process",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "创建实例",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.errcode==0) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"PROCESS_INSTANCE_ID\", data.result.process_instance_id);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"request\":{\n    \"title\":\"创建实例测试\",\n    \"process_code\":\"{{PROCESS_CODE}}\",\n    \"originator_user_id\":\"manager8036\",\n    \"form_component_values\":{\n      \"name\":\"待办工单\",\n      \"value\":\"123456\"\n    },\n    \"url\":\"http://www.dingtalk.com\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/process/workrecord/create?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"process",
+								"workrecord",
+								"create"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "更新实例状态",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.access_token) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"request\":{\n    \"process_instance_id\":\"{{PROCESS_INSTANCE_ID}}\",\n    \"status\":\"COMPLETED\",\n    \"result\":\"refuse\"\n    \n  }\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/process/workrecord/update?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"process",
+								"workrecord",
+								"update"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "创建待办事项",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.access_token) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"request\":{\n    \"process_instance_id\":\"{{PROCESS_INSTANCE_ID}}\",\n    \"activity_id\":\"solve\",\n    \"tasks\":{\n      \"userid\":\"manager8036\",\n      \"url\":\"https://www.baidu.com\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/process/workrecord/task/create?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"process",
+								"workrecord",
+								"task",
+								"create"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "更新待办状态",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.access_token) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"request\":{\n    \"agentid\":283242925,\n    \"process_instance_id\":\"8eed8415-6714-4ce0-9495-d89199c3c18f\",\n    \n    \"tasks\":{\n      \"task_id\":62325390057,\n      \"status\":\"CANCELED\",\n      \"result\":\"agree\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/process/workrecord/task/update?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"process",
+								"workrecord",
+								"task",
+								"update"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "批量取消待办",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									" ",
+									"if (data.access_token) {",
+									"  tests[\"Body has access_token\"] = true;",
+									"  postman.setEnvironmentVariable(\"ACCESS_TOKEN\", data.access_token);",
+									"}",
+									"else {",
+									"  tests[\"Body has access_token\"] = false;",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"request\":{\n    \"process_instance_id\":\"{{PROCESS_INSTANCE_ID}}\",\n    \"activity_id\":\"solve\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://oapi.dingtalk.com/topapi/process/workrecord/taskgroup/cancel?access_token={{ACCESS_TOKEN}}",
+							"protocol": "https",
+							"host": [
+								"oapi",
+								"dingtalk",
+								"com"
+							],
+							"path": [
+								"topapi",
+								"process",
+								"workrecord",
+								"taskgroup",
+								"cancel"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{ACCESS_TOKEN}}"
+								}
+							]
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -2408,7 +3260,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "dc16e9e6-4dc3-424e-8da3-c27b5f5fbd2b",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
@@ -2429,7 +3280,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "https://oapi.dingtalk.com/gettoken?corpid={{CORPID}}&corpsecret={{CORPSECRET}}",
+					"raw": "https://oapi.dingtalk.com/gettoken?appkey={{CORPID}}&appsecret={{CORPSECRET}}",
 					"protocol": "https",
 					"host": [
 						"oapi",
@@ -2441,15 +3292,130 @@
 					],
 					"query": [
 						{
-							"key": "corpid",
-							"value": "{{CORPID}}"
+							"key": "appkey",
+							"value": "{{CORPID}}",
+							"equals": true
 						},
 						{
-							"key": "corpsecret",
-							"value": "{{CORPSECRET}}"
+							"key": "appsecret",
+							"value": "{{CORPSECRET}}",
+							"equals": true
 						}
 					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "通过CODE换取用户身份 copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							" ",
+							"if (data.errcode=='0') {",
+							"  tests[\"Body has access_token\"] = true;",
+							"  postman.setEnvironmentVariable(\"USERINFO\", data);",
+							"}",
+							"else {",
+							"  tests[\"Body has access_token\"] = false;",
+							"}"
+						]
+					}
 				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://oapi.dingtalk.com/user/getuserinfo?access_token={{ACCESS_TOKEN}}&userid={{USERID}}",
+					"protocol": "https",
+					"host": [
+						"oapi",
+						"dingtalk",
+						"com"
+					],
+					"path": [
+						"user",
+						"getuserinfo"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{ACCESS_TOKEN}}",
+							"equals": true
+						},
+						{
+							"key": "userid",
+							"value": "{{USERID}}",
+							"equals": true
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "创建日程",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							" ",
+							"if (data.errcode=='0') {",
+							"  tests[\"Body has access_token\"] = true;",
+							"  postman.setEnvironmentVariable(\"USERINFO\", data);",
+							"}",
+							"else {",
+							"  tests[\"Body has access_token\"] = false;",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"create_vo\":{\n    \"summary\":\"阿里巴巴DING峰会\",\n    \"creator_userid\":\"09441216131253154\",\n    \"receiver_userids\":[\"09441216131253154\",\"1006194745881243164\"],\n    \"uuid\":\"ffbbfe92-0343-4c5c-9550-cc4ca0494a95\",\n    \"biz_id\":\"ffbbfe92\",\n    \"end_time\":{\n      \"unix_timestamp\":1557922190\n    },\n    \"calendar_type\":\"notification\",\n    \"start_time\":{\n      \"unix_timestamp\":1557839032\n    },\n    \"source\":{\n      \"title\":\"测试\",\n      \"url\":\"http://www.dingtalk.com/\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "https://oapi.dingtalk.com/topapi/calendar/create?access_token={{ACCESS_TOKEN}}",
+					"protocol": "https",
+					"host": [
+						"oapi",
+						"dingtalk",
+						"com"
+					],
+					"path": [
+						"topapi",
+						"calendar",
+						"create"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{ACCESS_TOKEN}}",
+							"equals": true
+						}
+					]
+				},
+				"description": null
 			},
 			"response": []
 		}
