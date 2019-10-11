@@ -24,7 +24,7 @@
 文档中有些接口不便于直接测试，需要逐步完善
 
 ### 截图
-![Postman](https://github.com/pluto1114/dingding-server-api/blob/master/screenshots/S001.png)
+![Postman](https://github.com/pluto1114/dingding-server-api/blob/master/screenshots/s001.png)
 
 ---
 随便吐槽一下：钉钉api并不很稳定，有时调用成功需要*运气*
